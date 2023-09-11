@@ -123,7 +123,7 @@ class DataReader:
             row_val['n_row'] = n_row + 1
 
             # return results: 
-            yield row_vals
+            yield row_val
     
     ######################################## YOUR CODE HERE ##################################################
 
