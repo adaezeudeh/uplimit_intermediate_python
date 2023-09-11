@@ -119,11 +119,11 @@ class DataReader:
             row_vals = row.strip('\n').split(self._sep)
             
             # define the row_vals dictionary 
-            row_vals = #### [YOUR CODE HERE] ####
-            row_vals['n_row'] = #### [YOUR CODE HERE] ####
+            row_val = {column_name: value for column_name, value in zip(self._col_names, row_vals)}
+            row_val['n_row'] = n_row + 1
 
             # return results: 
-            #### [YOUR CODE HERE] ####
+            yield row_vals
     
     ######################################## YOUR CODE HERE ##################################################
 
