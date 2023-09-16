@@ -63,17 +63,17 @@ def get_sales_information(file_path: str) -> Dict:
 # batches the files based on the number of processes
 def batch_files(file_paths: List[str], n_processes: int) -> List[set]:
     if n_processes > len(file_paths):
-        return #### [YOUR CODE HERE] ####
+        return [set(file_paths)]
 
-    n_per_batch = #### [YOUR CODE HERE] ####
+    n_per_batch = len(file_paths) // n_processes
 
     first_set_len = n_processes * n_per_batch
-    first_set = file_paths[0:first_set_len]
-    second_set = #### [YOUR CODE HERE] ####
+    first_set = file_paths[:first_set_len]
+    second_set = file_paths[first_set_len:]
 
-    batches = [set(file_paths[i:i + n_per_batch]) for i in range(0, len(first_set), n_per_batch)]
+    batches = [set(first_set[i:i + n_per_batch]) for i in range(0, len(first_set), n_per_batch)]
     for ind, each_file in enumerate(second_set):
-        #### [YOUR CODE HERE] ####
+        batches[ind % n_processes].add(each_file)
 
     return batches
 
@@ -165,20 +165,23 @@ def main() -> List[Dict]:
 
     ######################################## YOUR CODE HERE ##################################################
     with multiprocessing.Pool(processes=n_processes) as pool:
+        # Use pool.starmap to run the `run` function with each batch
+        revenue_data = pool.starmap(run, [(batch, i + 1) for i, batch in enumerate(batches)])
         
     ######################################## YOUR CODE HERE ##################################################
 
     en = time.time()
-    print("Overall time taken : {}".format(en-st))
+    print("Overall time taken: {}".format(en - st))
 
     ######################################## YOUR CODE HERE ##################################################
     for yearly_data in revenue_data:
+        flattened_revenue_data = flatten(revenue_data)
         
 
     ######################################## YOUR CODE HERE ##################################################
         
     # should return revenue data
-    return #### [YOUR CODE HERE] ####
+    return flattened_revenue_data
 
 
 if __name__ == '__main__':
