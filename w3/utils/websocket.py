@@ -1,7 +1,7 @@
 from typing import List
 from starlette.websockets import WebSocket, WebSocketState
 import time
-from w3.utils.database import DB
+from utils.database import DB
 
 
 class ConnectionManager:
