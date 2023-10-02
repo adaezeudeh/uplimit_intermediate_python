@@ -3,7 +3,7 @@ from typing import List, Dict
 from tqdm import tqdm
 import os
 import multiprocessing
-from w1.data_processor import DataProcessor
+from data_processor import DataProcessor
 import constants
 from global_utils import get_file_name, make_dir, plot_sales_data
 import json
